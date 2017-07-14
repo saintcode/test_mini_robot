@@ -1,0 +1,3 @@
+class MiniRobot
+
+end
