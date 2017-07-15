@@ -1,7 +1,7 @@
-class MiniRobot
-  require 'pp'
-  attr_accessor :field, :pos_x, :pos_y, :dir, :placed, :print
+require 'pp'
 
+class MiniRobot
+  attr_accessor :field, :pos_x, :pos_y, :dir, :is_placed, :print
   SIZE = 5
   ORIENT = %w|NORTH WEST SOUTH EAST|
   DELTA = [[-1,0], [0,1], [1,0], [0,-1]]
@@ -9,14 +9,14 @@ class MiniRobot
 
   def initialize(print: true)
     @field = Array.new(SIZE){ Array.new(SIZE, DEF_VAL) }
-    @pos_x, @pos_y = nil
+    @pos_x, @pos_y, @dir = 0, 0
+    @dir = 0
     @print = print
-    @placed = true
   end
 
   def place(x, y, direction)
     dir_val = ORIENT.index direction.to_s
-    put_to_field(x, y, dir_val)
+    @is_placed = put_to_field(x, y, dir_val, placed: true)
   end
 
   def move
@@ -36,23 +36,24 @@ class MiniRobot
   end
 
   def report
-    "#{@pos_x} #{@pos_y} #{ORIENT[@dir]}"
+    "#{@pos_x} #{@pos_y} #{ORIENT[@dir]}" if @is_placed
   end
 
   private
 
-  def put_to_field(x, y, dir)
-    return unless @placed
-    if dir && x>=0 && y>=0 && x<SIZE && y<SIZE
+  def put_to_field(x, y, dir, placed: false)
+    res = false
+    if (@is_placed || placed) && dir && x>=0 && y>=0 && x<SIZE && y<SIZE
       @dir = dir
       @field[x][y] = @dir
       if @pos_x && @pos_y
         @field[@pos_x][@pos_y] = DEF_VAL if x != @pos_x || y != @pos_y
       end
       @pos_x, @pos_y = x, y
+      res = true
     end
-    pp @field if @print
-    nil
+    pp @field if @is_placed && @print
+    res
   end
 
 end

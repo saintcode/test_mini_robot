@@ -1,7 +1,9 @@
 ### Requirements
     ruby >= 2.0.0
-    rspec 3.6
+    rspec >= 3.6
 
+### Install
+    gem install rspec -v 3.6
 
 ### Run application (example from application folder)
     irb
@@ -13,10 +15,5 @@
     robot.right
     robor.report
 
-### Install Rspec
-
-    gem install rspec -v 3.6
-
 ### Run Rspec tests
-
     rspec spec/mini_robot_spec.rb
