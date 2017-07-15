@@ -1,6 +1,6 @@
 class MiniRobot
   require 'pp'
-  attr_accessor :field, :pos_x, :pos_y, :dir, :print
+  attr_accessor :field, :pos_x, :pos_y, :dir, :placed, :print
 
   SIZE = 5
   ORIENT = %w|NORTH WEST SOUTH EAST|
@@ -11,6 +11,7 @@ class MiniRobot
     @field = Array.new(SIZE){ Array.new(SIZE, DEF_VAL) }
     @pos_x, @pos_y = nil
     @print = print
+    @placed = true
   end
 
   def place(x, y, direction)
@@ -41,6 +42,7 @@ class MiniRobot
   private
 
   def put_to_field(x, y, dir)
+    return unless @placed
     if dir && x>=0 && y>=0 && x<SIZE && y<SIZE
       @dir = dir
       @field[x][y] = @dir
