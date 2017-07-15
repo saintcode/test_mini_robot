@@ -1,3 +1,8 @@
+### Requirements
+    ruby >= 2.0.0
+    rspec 3.6
+
+
 ### Run application (example from application folder)
     irb
     require './models/mini_robot.rb'
