@@ -1,7 +1,5 @@
 require_relative '../models/mini_robot'
-
 describe MiniRobot do
-
   describe 'instance methods' do
     subject { MiniRobot.new(print: false) }
     it { should respond_to(:place).with(3).arguments }
@@ -12,8 +10,8 @@ describe MiniRobot do
   end
 
   describe 'instance behavior' do
-    subject { MiniRobot.new(print: false) }
     before :each do
+      subject { MiniRobot.new(print: false) }
       subject.place(2, 1, :EAST)
     end
 
@@ -21,19 +19,16 @@ describe MiniRobot do
       expect(subject.report).to eq('2 1 EAST')
     end
 
-    describe 'correct move' do
-      it 'EAST' do
-        subject.move
-        expect(subject.report).to eq('2 0 EAST')
-      end
+    it 'correct move EAST' do
+      subject.move
+      puts "SSSSSS=#{subject.report}"
+      expect(subject.report).to eq('2 0 EAST')
     end
 
-    describe 'correct move over field' do
-      it 'EAST' do
-        subject.move
-        subject.move
-        expect(subject.report).to eq('2 0 EAST')
-      end
+    it 'correct move over field' do
+      subject.move
+      subject.move
+      expect(subject.report).to eq('2 0 EAST')
     end
 
     describe 'correct rotate' do
@@ -67,6 +62,22 @@ describe MiniRobot do
         subject.move
         expect(subject.report).to eq('3 0 EAST')
       end
+    end
+  end
+
+  describe 'new instance without place' do
+    before :each do
+      subject { MiniRobot.new(print: false) }
+    end
+
+    it 'should ignore report' do
+      expect(subject.report).to eq nil
+    end
+    it 'should ignore move' do
+      expect(subject.move).to eq false
+    end
+    it 'should ignore left' do
+      expect(subject.left).to eq false
     end
   end
 end
