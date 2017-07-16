@@ -7,7 +7,7 @@ class MiniRobot
   DELTA = [[-1, 0], [0, 1], [1, 0], [0, -1]].freeze
   DEF_VAL = -1
 
-  def initialize(print: true)
+  def initialize(print: nil)
     @field = Array.new(SIZE) { Array.new(SIZE, DEF_VAL) }
     @pos_x, @pos_y, @dir = 0, 0
     @dir = 0

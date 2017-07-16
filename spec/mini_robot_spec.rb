@@ -21,7 +21,6 @@ describe MiniRobot do
 
     it 'correct move EAST' do
       subject.move
-      puts "SSSSSS=#{subject.report}"
       expect(subject.report).to eq('2 0 EAST')
     end
 
